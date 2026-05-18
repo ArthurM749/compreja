@@ -10,4 +10,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Pedido extends Model
 {
     use SoftDeletes;
+
+    public function usuario()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function itens()
+    {
+        return $this->hasMany(ItemPedido::class, 'pedido_id');
+    }
 }
