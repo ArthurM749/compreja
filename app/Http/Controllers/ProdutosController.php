@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class ProdutosController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('produto.owner')->only(['update', 'destroy']);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -29,6 +35,7 @@ class ProdutosController extends Controller
             'preco' => 'required|numeric',
             'quantidade' => 'required|integer',
             'categoria' => 'required|string|max:255',
+            'user_id' => 'required|integer|exists:users,id',
         ]);
 
         $produto = Produto::create($request->all());

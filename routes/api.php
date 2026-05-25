@@ -29,9 +29,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('pedidos')->group(function () {
         Route::get('/', [PedidosController::class, 'index']);
         Route::post('/', [PedidosController::class, 'store']);
-        Route::get('/{id}', [PedidosController::class, 'show']);
-        Route::put('/{id}', [PedidosController::class, 'update'])->middleware('pedido.owner');
-        Route::delete('/{id}', [PedidosController::class, 'destroy'])->middleware('pedido.owner');
+        Route::get('/{id}', [PedidosController::class, 'show'])->whereNumber('id');
+        Route::put('/{id}', [PedidosController::class, 'update'])->middleware('pedido.owner')->whereNumber('id');
+        Route::delete('/{id}', [PedidosController::class, 'destroy'])->middleware('pedido.owner')->whereNumber('id');
     });
 
 });
